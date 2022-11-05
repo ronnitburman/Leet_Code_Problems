@@ -5,18 +5,13 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
-        if len(s)<1:
-            return False
-        else:
-            flag = True
-            countr = 0
-            for sub in s:
-                if sub in t:
-                    if countr<=t.index(sub):
-                        countr =t.index(sub)
-                    else:
-                        flag=False
-                else:
-                    flag=False
+        i=0
+        j=0
+        while i<len(s) and j<len(t):
+            if s[i]==t[j]:
+                i+=1
+                j+=1
+            else:
+                j+=1
+        return i==len(s)
 
-            return flag
