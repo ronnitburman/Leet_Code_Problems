@@ -10,34 +10,50 @@ class Solution(object):
         :type l2: ListNode
         :rtype: ListNode
         """
-        carry=0
-        ll = temp = l1
+        # carry=0
+        # ll = temp = l1
         
-        while l1 and l2:
-            temp=l1
-            temp.val=l1.val+l2.val+carry
-            carry = temp.val//10
-            temp.val = temp.val%10
-            l1 = l1.next
-            l2 = l2.next
+        # while l1 and l2:
+        #     temp=l1
+        #     temp.val=l1.val+l2.val+carry
+        #     carry = temp.val//10
+        #     temp.val = temp.val%10
+        #     l1 = l1.next
+        #     l2 = l2.next
         
-        while l1:
-            temp=l1
-            temp.val=l1.val + carry
-            carry = temp.val//10
-            temp.val = temp.val%10
-            l1=l1.next
+        # while l1:
+        #     temp=l1
+        #     temp.val=l1.val + carry
+        #     carry = temp.val//10
+        #     temp.val = temp.val%10
+        #     l1=l1.next
         
-        while l2:
-            temp.next=l2
-            temp=temp.next
-            temp.val=l2.val + carry
-            carry = temp.val//10
-            temp.val = temp.val%10
-            l2=l2.next
+        # while l2:
+        #     temp.next=l2
+        #     temp=temp.next
+        #     temp.val=l2.val + carry
+        #     carry = temp.val//10
+        #     temp.val = temp.val%10
+        #     l2=l2.next
             
-        if carry == 1:
-            temp.next=ListNode()
-            temp.next.val = 1
-        return ll
-           
+        # if carry == 1:
+        #     temp.next=ListNode()
+        #     temp.next.val = 1
+        # return ll
+        carry=0
+        head=temp=ListNode()
+        
+        while l1 or l2 or carry:
+            val = 0
+            if l1:
+                val+=l1.val
+                l1=l1.next
+            if l2:
+                val+=l2.val
+                l2=l2.next
+
+            carry, val = divmod(val+carry,10)
+            temp.next = ListNode(val)
+            temp=temp.next
+
+        return head.next
